@@ -1,4 +1,5 @@
 from dash.dependencies import Input, Output
+import plotly.express as px
 
 def register_callbacks(app, congresistas):
     @app.callback(
@@ -20,16 +21,39 @@ def register_callbacks(app, congresistas):
             return [None] * 11
         
         row = congresistas.loc[congresistas['id'] == congresista_id].iloc[0]
+        
         return [
-            row['foto'],
-            row['nombre'],
-            row['partido'],
-            row['ultima_votacion'],
-            row['bancada'],
-            row['comision'],
-            row['departamento'],
-            row['perfil'],
-            row['entidades'],
-            row['debilidades'],
-            row['apoyo_rechazo']
+            row.get('foto', 'assets/default.png'),
+            row.get('nombre', 'Nombre no disponible'),
+            row.get('partido', 'Partido no disponible'),
+            row.get('ultima_votacion', 'Última votación no disponible'),
+            row.get('bancada', 'Bancada no disponible'),
+            row.get('comision', 'Comisión no disponible'),
+            row.get('departamento', 'Departamento no disponible'),
+            row.get('perfil', 'Perfil no disponible'),
+            row.get('entidades', 'Entidades no disponibles'),
+            row.get('debilidades', 'Debilidades no disponibles'),
+            row.get('apoyo_rechazo', 'Apoyo/Rechazo no disponible')
         ]
+
+    @app.callback(
+        Output('composicion-congreso', 'figure'),
+        [Input('congresista-dropdown', 'value')]
+    )
+    def update_composicion_congreso(_):
+        composicion = congresistas['bancada'].value_counts().reset_index()
+        composicion.columns = ['bancada', 'count']
+        fig = px.pie(composicion, values='count', names='bancada', title='Composición del Congreso')
+        return fig
+
+    @app.callback(
+        Output('resultados-votaciones', 'figure'),
+        [Input('proyecto-ley-dropdown', 'value')]
+    )
+    def update_resultados_votaciones(proyecto_ley):
+        if proyecto_ley is None:
+            return px.bar(title='Seleccione un proyecto de ley')
+
+        votaciones = congresistas[congresistas['proyecto_ley'] == proyecto_ley]
+        fig = px.bar(votaciones, x='nombre', y='voto', title=f'Resultados de Votación para {proyecto_ley}')
+        return fig
