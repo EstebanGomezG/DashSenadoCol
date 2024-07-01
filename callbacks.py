@@ -16,28 +16,20 @@ def register_callbacks(app, congresistas):
         [Input('congresista-dropdown', 'value')]
     )
     def update_congresista_info(congresista_id):
-        print(f"congresista_id: {congresista_id}")  # Imprimir el ID del congresista seleccionado
         if congresista_id is None:
-            return ['', '', '', '', '', '', '', '', '', '', '']
-
-        row = congresistas.loc[congresistas['id'] == congresista_id]
-        print(f"row: {row}")  # Imprimir la fila correspondiente
-
-        if row.empty:
-            return ['', '', '', '', '', '', '', '', '', '', '']
-
-        row = row.iloc[0]
+            return [None] * 11
         
-        return (
-            row["foto"],
+        row = congresistas.loc[congresistas['id'] == congresista_id].iloc[0]
+        return [
+            row['foto'],
             row['nombre'],
-            f"Partido: {row['partido']}",
-            f"Última votación: {row['ultima_votacion']}",
-            f"Bancada: {row['bancada']}",
-            f"Comisión: {row['comision']}",
-            f"Departamento: {row['departamento']}",
-            f"Perfil: {row['perfil_politico']}",
-            f"Entidades de incidencia: {row['entidades_incidencia']}",
-            f"Debilidades: {row['debilidades']}",
-            f"Apoyo/Rechazo a proyectos: {row['apoyo_rechazo']}"
-        )
+            row['partido'],
+            row['ultima_votacion'],
+            row['bancada'],
+            row['comision'],
+            row['departamento'],
+            row['perfil'],
+            row['entidades'],
+            row['debilidades'],
+            row['apoyo_rechazo']
+        ]
