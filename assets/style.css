@@ -1,0 +1,18 @@
+.congresista-info {
+    padding: 20px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.congresista-foto {
+    max-width: 200px;
+    margin-bottom: 20px;
+}
+
+.congresista-nombre {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
