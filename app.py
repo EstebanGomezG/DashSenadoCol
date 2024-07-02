@@ -7,6 +7,7 @@ from callbacks import register_callbacks
 congresistas = load_data()
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+server = app.server
 
 app.layout = create_layout(congresistas)
 
