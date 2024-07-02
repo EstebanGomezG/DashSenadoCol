@@ -54,8 +54,11 @@ def create_layout(congresistas):
                     ], className='congresista-info')
                 ])
             ]),
-            dcc.Tab(label='Composición del Congreso', children=[
-                dcc.Graph(id='composicion-congreso')
+            dcc.Tab(label='Distribución Bancadas', children=[
+                dcc.Graph(id='distribucion-bancadas')
+            ]),
+            dcc.Tab(label='Distribución Partidos', children=[
+                dcc.Graph(id='distribucion-partidos')
             ]),
             dcc.Tab(label='Resultados de Votaciones', children=[
                 dcc.Dropdown(

@@ -37,13 +37,23 @@ def register_callbacks(app, congresistas):
         ]
 
     @app.callback(
-        Output('composicion-congreso', 'figure'),
+        Output('distribucion-bancadas', 'figure'),
         [Input('congresista-dropdown', 'value')]
     )
-    def update_composicion_congreso(_):
-        composicion = congresistas['bancada'].value_counts().reset_index()
-        composicion.columns = ['bancada', 'count']
-        fig = px.pie(composicion, values='count', names='bancada', title='Composición del Congreso')
+    def update_distribucion_bancadas(_):
+        distribucion = congresistas['bancada'].value_counts().reset_index()
+        distribucion.columns = ['bancada', 'count']
+        fig = px.pie(distribucion, values='count', names='bancada', title='Distribución Bancadas')
+        return fig
+    
+    @app.callback(
+        Output('distribucion-partidos', 'figure'),
+        [Input('congresista-dropdown', 'value')]
+    )
+    def update_distribucion_partidos(_):
+        distribucion_part = congresistas['partido'].value_counts().reset_index()
+        distribucion_part.columns = ['partido', 'count']
+        fig = px.pie(distribucion_part, values='count', names='partido', title='Distribución Partidos')
         return fig
 
     @app.callback(
