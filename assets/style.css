@@ -1,6 +1,38 @@
-.congresista-info {
-    padding: 20px;
+body {
+    font-family: 'Montserrat', sans-serif;  
+    color: #291A1E;                    
+    background-color: #fffefb;         
+    margin: 0px;                        
+    padding: 0px;
 }
+
+.container {
+    width: 80%;             
+    max-width: 1200px;      
+    margin-left: 0px;      
+    margin-right: 0px;
+    padding: 0px;          
+    background-color: #fffefb;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+}
+
+h1{
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+P{
+    font-size: 18px;
+    font-weight: normal;                  
+    margin-left: 60px;      
+    margin-right: 60px;
+    padding: 10px;
+}
+
+
 
 .label {
     font-weight: bold;
@@ -9,10 +41,19 @@
 .congresista-foto {
     max-width: 200px;
     margin-bottom: 20px;
+    align-items: center;
+    padding: 20px;
+    margin-left: 400px;      
+    margin-right: 400px;
 }
 
 .congresista-nombre {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
+}
+
+.distribucion-bancadas {
+    padding: 20px;
+    text-align: center;
 }
